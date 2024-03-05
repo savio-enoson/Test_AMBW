@@ -110,8 +110,10 @@ h3 {
 
     text-align: center;
     text-decoration: none;
-    font-size: 1.25em;
+    font-size: 1em;
     font-family: Arial, Helvetica, sans-serif;
+
+    container-type: inline-size;
 }
 
 .card i.workout_logo {
