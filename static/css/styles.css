@@ -1,16 +1,13 @@
 :root {
-    --light-color: #e3e3e3;
     --primary-color: #DEDEDE;
     --secondary-color: #D3D3D3;
     --text-color: #131313;
-    --light-primary-color: #eeeeee;
     --highlight-color: #6cb8ff;
     --dark-highlight-color: #5596d5;
-    --font-size: calc(10px + 1vw);
 }
 
 body {
-    color: var(--text-color) !important;
+    color: var(--text-color);
     overflow-x: hidden;
 }
 
