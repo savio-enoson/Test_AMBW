@@ -1,11 +1,15 @@
 {
   "name": "My Workout Ap",
   "short_name": "MyApp",
+  "icons": [
+    {
+      "src": "siteicon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
   "start_url": "index.html",
-  "scope": ".",
   "display": "standalone",
-  "orientation": "portrait-primary",
   "description": "Test 1 AMBW | C14210278",
-  "dir": "ltr",
   "lang": "en-US"
 }
