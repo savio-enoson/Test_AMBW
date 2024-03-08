@@ -4,7 +4,7 @@ let networkDataReceived = false;
 if ('indexedDB' in window) {
     readAllData('workouts')
     .then(function (data) {
-        console.log("data in cache");
+        console.log("data in indexedDB");
         console.log(data)
     });
 }

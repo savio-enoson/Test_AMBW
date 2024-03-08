@@ -5,14 +5,15 @@ importScripts('static/js/utility.js');
 var CACHE_STATIC_NAME = 'static-v10';
 var CACHE_DYNAMIC_NAME = 'dynamic-v2';
 var STATIC_FILES = [
-  'index.html',
-  'offline.html',
-  'static/js/app.js',
-  'static/js/feed.js',
-  'static/js/idb.js',
-  'static/js/promise.js',
-  'static/js/fetch.js',
-  'static/css/styles.css',
+    '/',
+    'index.html',
+    'offline.html',
+    'static/js/app.js',
+    'static/js/feed.js',
+    'static/js/idb.js',
+    'static/js/promise.js',
+    'static/js/fetch.js',
+    'static/css/styles.css',
 ];
 
 // function trimCache(cacheName, maxItems) {
