@@ -31,11 +31,10 @@ function render_workout_cards() {
     const container = $('#workout_container')
     const workouts = JSON.parse(localStorage.getItem('workouts'));
 
-    try {
-        Object.entries(workouts).forEach(([key, value]) => {
-            const s_cat = (value.category === 'Strength')? 'str' : '';
-            const workout_name = parse_snakecase(key)
-            container.append(`
+    Object.entries(workouts).forEach(([key, value]) => {
+        const s_cat = (value.category === 'Strength')? 'str' : '';
+        const workout_name = parse_snakecase(key)
+        container.append(`
             <div class="col-sm-12 col-md-6 col-lg-4">
                 <div class="card" onclick="get_workout_detail('${key}')">
                     <i class="${value.icon} workout_logo"></i>
@@ -48,11 +47,8 @@ function render_workout_cards() {
                     </div>
                 </div>
             </div>
-        `)
-        })
-    } catch (e) {
-        console.log('data not cached')
-    }
+            `)
+    })
 }
 
 function get_workout_detail(workout_pk) {
