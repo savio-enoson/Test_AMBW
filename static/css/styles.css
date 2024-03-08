@@ -9,7 +9,6 @@
 body {
     color: var(--text-color);
     padding: 0;
-    width: 100vw;
 }
 
 h3 {
