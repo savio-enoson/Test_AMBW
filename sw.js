@@ -1,35 +1,18 @@
-importScripts('/static/js/idb.js');
-importScripts('/static/js/utility.js');
+importScripts('static/js/idb.js');
+importScripts('static/js/utility.js');
 
 
 var CACHE_STATIC_NAME = 'static-v10';
 var CACHE_DYNAMIC_NAME = 'dynamic-v2';
 var STATIC_FILES = [
-  '/',
-  '/index.html',
-  '/offline.html',
-  '/static/js/app.js',
-  '/static/js/feed.js',
-  '/static/js/idb.js',
-  '/static/js/promise.js',
-  '/static/js/fetch.js',
-  '/static/js/material.min.js',
-  '/static/css/styles.css',
-  '/assets/boxing.webp',
-  '/assets/cardio.jpeg',
-  '/assets/FitZone (1).png',
-  '/assets/FitZone.png',
-  '/assets/header2.png',
-  '/assets/logo.png',
-  '/assets/muscle.jpeg',
-  '/assets/pilates.webp',
-  '/assets/pound.jpg',
-  '/assets/strength.jpeg',
-  '/assets/yoga.jpeg',
-  '/assets/zumba.webp',
-  'https://fonts.googleapis.com/css?family=Roboto:400,700',
-  'https://fonts.googleapis.com/icon?family=Material+Icons',
-  'https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css'
+  'index.html',
+  'offline.html',
+  'static/js/app.js',
+  'static/js/feed.js',
+  'static/js/idb.js',
+  'static/js/promise.js',
+  'static/js/fetch.js',
+  'static/css/styles.css',
 ];
 
 // function trimCache(cacheName, maxItems) {
@@ -45,8 +28,6 @@ var STATIC_FILES = [
 //     })
 // }
 
-console.log('ok2');
-
 self.addEventListener('install', function (event) {
   console.log('[Service Worker] Installing Service Worker ...', event);
   event.waitUntil(
@@ -55,7 +36,6 @@ self.addEventListener('install', function (event) {
         console.log('[Service Worker] Precaching App Shell');
         console.log(STATIC_FILES);
         cache.addAll(STATIC_FILES);
-        console.log('ok');
       })
   )
 });
@@ -88,19 +68,18 @@ function isInArray(string, array) {
 }
 
 self.addEventListener('fetch', function (event) {
-
-  var url = 'https://tespwa-54ec4-default-rtdb.firebaseio.com/classes';
+  var url = 'https://test1-ambw-default-rtdb.asia-southeast1.firebasedatabase.app/workout';
   if (event.request.url.indexOf(url) > -1) {
     event.respondWith(fetch(event.request)
       .then(function (res) {
         var clonedRes = res.clone();
-        clearAllData('classes')
+        clearAllData('workouts')
           .then(function () {
             return clonedRes.json();
           })
           .then(function (data) {
             for (var key in data) {
-              writeData('classes', data[key])
+              writeData('workouts', data[key])
             }
           });
         return res;

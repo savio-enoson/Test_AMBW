@@ -1,15 +1,42 @@
+let deferredPrompt;
+
+if (!window.Promise) {
+    window.Promise = Promise;
+}
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register('sw.js')
+        .then(function () {
+            console.log('Service worker registered!');
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+}else{
+}
+
+window.addEventListener('beforeinstallprompt', function(event) {
+    console.log('beforeinstallprompt fired');
+    event.preventDefault();
+    deferredPrompt = event;
+    return false;
+});
+
 function parse_snakecase(text) {
     return text.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
+
 function render_workout_cards() {
     const container = $('#workout_container')
     const workouts = JSON.parse(localStorage.getItem('workouts'));
 
-    Object.entries(workouts).forEach(([key, value]) => {
-        const s_cat = (value.category === 'Strength')? 'str' : '';
-        const workout_name = parse_snakecase(key)
-        container.append(`
-            <div class="col-sm-6 col-md-4 col-lg-3">
+    try {
+        Object.entries(workouts).forEach(([key, value]) => {
+            const s_cat = (value.category === 'Strength')? 'str' : '';
+            const workout_name = parse_snakecase(key)
+            container.append(`
+            <div class="col-sm-12 col-md-6 col-lg-4">
                 <div class="card" onclick="get_workout_detail('${key}')">
                     <i class="${value.icon} workout_logo"></i>
                     <h1 class="card-title">${workout_name}</h1>
@@ -22,7 +49,10 @@ function render_workout_cards() {
                 </div>
             </div>
         `)
-    })
+        })
+    } catch (e) {
+        console.log('data not cached')
+    }
 }
 
 function get_workout_detail(workout_pk) {
