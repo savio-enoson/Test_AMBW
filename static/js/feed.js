@@ -9,16 +9,23 @@ if ('indexedDB' in window) {
     });
 }
 
-fetch(init_url)
-.then(function (res) {
-  return res.json();
-})
-.then(function (data) {
-  networkDataReceived = true;
-  console.log("fetched data from web");
-  console.log(data)
-  localStorage.setItem('workouts', JSON.stringify(data));
-});
+if (!networkDataReceived) {
+    fetch(init_url)
+    .then(function (res) {
+        return res.json();
+    })
+    .then(function (data) {
+        networkDataReceived = true;
+        console.log("fetched data from web");
+        console.log(data)
+        localStorage.setItem('workouts', JSON.stringify(data));
+    })
+    .catch(function (error) {
+        if (!localStorage.getItem('workouts')) {
+            window.location.href = 'offline.html';
+        }
+    });
+}
 
 
 
